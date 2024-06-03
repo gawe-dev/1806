@@ -47,6 +47,7 @@ size = Vector3(50, 2, 50)
 
 [node name="MusketeerSpawn1" parent="." instance=ExtResource("1_20jik")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -9)
+laneAttack = "Mid"
 
 [node name="Flag2" type="Node3D" parent="MusketeerSpawn1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 9)
@@ -66,8 +67,18 @@ material_override = SubResource("StandardMaterial3D_7ff4f")
 mesh = SubResource("BoxMesh_0620e")
 skeleton = NodePath("../..")
 
+[node name="Flag4" type="Node3D" parent="MusketeerSpawn1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 47)
+
+[node name="Point" type="MeshInstance3D" parent="MusketeerSpawn1/Flag4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_7ff4f")
+mesh = SubResource("BoxMesh_0620e")
+skeleton = NodePath("../..")
+
 [node name="MusketeerSpawn2" parent="." instance=ExtResource("1_20jik")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -9)
+laneAttack = "Mid"
 
 [node name="Flag2" type="Node3D" parent="MusketeerSpawn2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
@@ -116,7 +127,7 @@ skeleton = NodePath("../..")
 
 [node name="Player" type="StaticBody3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(-0.126511, 0, 0.991965, 0, 1, 0, -0.991965, 0, -0.126511, 23.9705, 4.05686, 14.8802)
+transform = Transform3D(-0.126511, 0, 0.991965, 0, 1, 0, -0.991965, 0, -0.126511, -4.94252, 4.05686, 146.458)
 script = ExtResource("2_s3dj3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
@@ -126,7 +137,12 @@ shape = SubResource("BoxShape3D_lr2ye")
 texture = ExtResource("3_20gaq")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, -1.21669e-08, 8.6572e-08, 0, 0.990268, 0.139173, -8.74228e-08, 0.139173, -0.990268, 0, 5, -15.0635)
+transform = Transform3D(-1, -4.62519e-08, 7.41856e-08, 4.31499e-08, 0.476883, 0.878967, -7.60318e-08, 0.878967, -0.476883, 3.0223, 20.3767, 6.70899)
+
+[node name="Mid" type="Node" parent="."]
+
+[node name="Barricada" type="Node3D" parent="Mid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 23)
 
 [editable path="MusketeerSpawn1"]
 [editable path="MusketeerSpawn2"]

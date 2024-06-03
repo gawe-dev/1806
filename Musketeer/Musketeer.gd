@@ -4,15 +4,24 @@ extends CharacterBody3D
 @onready var climb_ray:RayCast3D = $CollisionShape3D/ClimbRay
 @onready var timer : Timer = $Timer
 
+@export var laneAttack : String
+
+##TODO: Commitear y pushear después de probar funcionalidad de atacar barricada
+#### TODO: HACER POSICIONAMIENTO DE TROPAS AL MOMENTO DE LLEGAR A ATACAR EL PUNTO
+##TODO: Refactorizar código después de hacer ataque melé
+
 var target:Node3D
 var flags:Array[Node3D]
+var barricades:Array[Node3D]
 func _ready():
 	target = get_tree().current_scene.get_node("%Player")
 	timer.timeout.connect(ShootOrReload)
-	##Recolectar todas las banderas del spawn de esta instancia
-	for node in get_parent().find_children("Flag*"):
+	##Obtener todas las banderas del spawn de esta instancia
+	for node in get_parent().find_children("Flag*", "Node3D",false):
 		flags.push_back(node)
-	pass
+	##Obtener todas las barricadas de la linea sugerida por el spawn
+	for node in get_tree().current_scene.find_child(laneAttack).get_children(false):
+		barricades.push_back(node)
 
 var delta : float
 func _physics_process(_delta):
@@ -50,42 +59,55 @@ func FreeQueue():
 			queue_free()
 
 func ClimbWalls():
-	if (
-		climb_ray.is_colliding()
-	and climb_ray.get_collider().is_in_group("Stair")
-	):
-		velocity.y = 2
+	if climb_ray.is_colliding():
+		if climb_ray.get_collider().is_in_group("Stair"):
+			velocity.y = 2
+		#else:
+			#velocity.x = transform.basis.x.x * 10
+			#velocity.z = transform.basis.x.z * 10
 
 var reloading := false
 var can_shoot := true
+var current_barricade := 0
 func StopAndPrepare():
 	if (global_position - target.global_position).length() < (shoot_ray.target_position.z - 5):
-		shoot_ray.look_at(target.global_position, up_direction,true)
+		shoot_ray.look_at(target.global_position, up_direction, true)
 		if not reloading:
 			velocity.x = 0
 			velocity.z = 0
+			AimAndShoot()
+	elif (global_position - barricades[current_barricade].global_position).length() < (shoot_ray.target_position.z):
+		shoot_ray.look_at(barricades[current_barricade].global_position, up_direction, true)
+		if speed > .1:
+			speed -= .004
+		else:
+			speed = .1
+		if not reloading:
 			AimAndShoot()
 	elif shoot_ray.rotation.x != 0 and shoot_ray.rotation.y != 0 and shoot_ray.rotation.z != 0:
 			shoot_ray.rotation.x = 0
 			shoot_ray.rotation.y = 0
 			shoot_ray.rotation.z = 0
+			is_aiming = false
 
+var is_aiming := false
 func AimAndShoot():
+	is_aiming = true
 	if can_shoot:
 		can_shoot = false
 		timer.start()
 
 func ShootOrReload():
 	if not reloading:
-		print("#start AimAndShoot")
+		print("Animación de disparo")
 		if (
 			shoot_ray.is_colliding()
 		and shoot_ray.get_collider().has_method("GetDamage")
 		):
 			shoot_ray.get_collider().GetDamage(1)
-			print("disparé y le di")
+			print("sonido de disparé y le di")
 		else:
-			print("disparé y no le di")
+			print("sonido disparé y no le di")
 		can_shoot = false
 		reloading = true
 		timer.start()
