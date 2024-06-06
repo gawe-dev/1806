@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://qetkbumdir4p"]
+
+[ext_resource type="Script" path="res://Musketeer/MusketeerSpawn.gd" id="1_c3jkx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdq72"]
+transparency = 1
+albedo_color = Color(1, 0.258824, 0.258824, 0.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jn6pr"]
+size = Vector3(1, 2, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ff4f"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.564706)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0620e"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="MusketeerSpawn" type="Node3D"]
+script = ExtResource("1_c3jkx")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[node name="StartPoint" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.2)
+material_override = SubResource("StandardMaterial3D_jdq72")
+mesh = SubResource("BoxMesh_jn6pr")
+
+[node name="Flag1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Point" type="MeshInstance3D" parent="Flag1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_7ff4f")
+mesh = SubResource("BoxMesh_0620e")
+skeleton = NodePath("../..")
+
+[node name="Flag2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="Cover1" type="MeshInstance3D" parent="Flag2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_7ff4f")
+mesh = SubResource("BoxMesh_0620e")
+skeleton = NodePath("../..")
+
+[node name="Cover2" type="MeshInstance3D" parent="Flag2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_7ff4f")
+mesh = SubResource("BoxMesh_0620e")
+skeleton = NodePath("../..")

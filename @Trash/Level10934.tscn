@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://rudfifbsciqk"]
 
-[ext_resource type="PackedScene" uid="uid://dn3skb76prelq" path="res://Musketeer/Musketeer.Spawn.tscn" id="1_20jik"]
+[ext_resource type="PackedScene" uid="uid://dn3skb76prelq" path="res://@Trash/Musketeer.Spawn.tscn" id="1_20jik"]
 [ext_resource type="Script" path="res://@Commons/GetDamage.gd" id="2_s3dj3"]
 [ext_resource type="Texture2D" uid="uid://bdh7fgfij3bgd" path="res://icon.svg" id="3_20gaq"]
 

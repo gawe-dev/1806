@@ -1,6 +1,6 @@
 extends Node
 
-@onready var mosketeerScene : PackedScene = preload("res://Musketeer/Musketeer.tscn")
+@onready var mosketeerScene : PackedScene = preload("res://Musketeerr/Musketeer.tscn")
 @onready var timer : Timer = $Timer
 @export var laneAttack:String
 

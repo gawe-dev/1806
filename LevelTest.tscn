@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://c66xcag1omqr1"]
+
+[ext_resource type="PackedScene" uid="uid://qetkbumdir4p" path="res://Musketeer/MusketeerSpawn.tscn" id="1_spstg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ojh31"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_71opo"]
+sky_material = SubResource("ProceduralSkyMaterial_ojh31")
+
+[sub_resource type="Environment" id="Environment_y0uth"]
+background_mode = 2
+sky = SubResource("Sky_71opo")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h4j57"]
+albedo_color = Color(0.34902, 0.164706, 0.0627451, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Env" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Env"]
+environment = SubResource("Environment_y0uth")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Env"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.483032, 0)
+material_override = SubResource("StandardMaterial3D_h4j57")
+use_collision = true
+size = Vector3(17, 1, 17)
+
+[node name="Player" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 6)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.780125, 0, -0.625624, 0, 1, 0, 0.625624, 0, -0.780125, 0, 1.88144, -9.29598)
+
+[node name="Mid" type="Node" parent="."]
+
+[node name="Node3D" type="Node3D" parent="Mid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 8)
+
+[node name="MusketeerSpawn" parent="." instance=ExtResource("1_spstg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.00396, -8.04986)
+laneAttack = "Mid"
