@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6lmichtnv4av"]
+
+[ext_resource type="Script" path="res://Drops/PlacementDrop.gd" id="1_8fdul"]
+
+[node name="Drops" type="Node"]
+script = ExtResource("1_8fdul")

@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://c66xcag1omqr1"]
+[gd_scene load_steps=7 format=3 uid="uid://c66xcag1omqr1"]
 
+[ext_resource type="PackedScene" uid="uid://c6lmichtnv4av" path="res://Drops/PlacementDrop.tscn" id="1_0uteh"]
 [ext_resource type="PackedScene" uid="uid://qetkbumdir4p" path="res://Musketeer/MusketeerSpawn.tscn" id="1_spstg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ojh31"]
@@ -36,7 +37,7 @@ size = Vector3(17, 1, 17)
 
 [node name="Player" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9906, 0, 38.3566)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.780125, 0, -0.625624, 0, 1, 0, 0.625624, 0, -0.780125, 0, 1.88144, -9.29598)
@@ -44,7 +45,10 @@ transform = Transform3D(-0.780125, 0, -0.625624, 0, 1, 0, 0.625624, 0, -0.780125
 [node name="Mid" type="Node" parent="."]
 
 [node name="Node3D" type="Node3D" parent="Mid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 3)
+
+[node name="Drops" parent="." instance=ExtResource("1_0uteh")]
+unique_name_in_owner = true
 
 [node name="MusketeerSpawn" parent="." instance=ExtResource("1_spstg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.00396, -8.04986)
