@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://qetkbumdir4p"]
+[gd_scene load_steps=7 format=3 uid="uid://ccwnly7avoeb8"]
 
-[ext_resource type="Script" path="res://Musketeer/MusketeerSpawn.gd" id="1_c3jkx"]
+[ext_resource type="Script" path="res://Arquebusier/ArquebusierSpawn.gd" id="1_rktk4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdq72"]
 transparency = 1
@@ -16,12 +16,12 @@ albedo_color = Color(1, 0, 0, 0.564706)
 [sub_resource type="BoxMesh" id="BoxMesh_0620e"]
 size = Vector3(0.2, 0.2, 0.2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_36gu8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tr5aq"]
 transparency = 1
-albedo_color = Color(1, 1, 0, 0.611765)
+albedo_color = Color(1, 0.913725, 0.258824, 0.607843)
 
-[node name="MusketeerSpawn" type="Node3D"]
-script = ExtResource("1_c3jkx")
+[node name="ArquebusierSpawn" type="Node3D"]
+script = ExtResource("1_rktk4")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 7.0
@@ -52,12 +52,12 @@ skeleton = NodePath("../..")
 
 [node name="Cover1" type="MeshInstance3D" parent="Flag2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.1, 0)
-material_override = SubResource("StandardMaterial3D_36gu8")
+material_override = SubResource("StandardMaterial3D_tr5aq")
 mesh = SubResource("BoxMesh_0620e")
 skeleton = NodePath("../..")
 
 [node name="Cover2" type="MeshInstance3D" parent="Flag2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.1, 0)
-material_override = SubResource("StandardMaterial3D_36gu8")
+material_override = SubResource("StandardMaterial3D_tr5aq")
 mesh = SubResource("BoxMesh_0620e")
 skeleton = NodePath("../..")
