@@ -65,7 +65,6 @@ func _on_animation_player_animation_finished(anim_name):
 	
 	if anim_name == Current_Weapon.Shoot_Anim && Current_Weapon.Auto_Fire == true:
 		if Input.is_action_pressed("Shoot"):
-			print("EH?")
 			shoot()
 
 func shoot():
@@ -80,7 +79,7 @@ func shoot():
 					print("Weapon Type Not Chosem")
 				HITSCAN:
 					Hit_Scan_Collision(Camera_Collision)
-				PROJECTILE:
+				MELE:
 					pass
 	else:
 		reload()
@@ -124,3 +123,6 @@ func Hit_Scan_Damage(Collider):
 		Collider.Hit_Successful(Current_Weapon.Damage)
 
 
+func _on_sword_hit_body_entered(body):
+	if body.has_method("Hit_Successful"):
+		body.Hit_Successful(Current_Weapon.Damage)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bedho26bpm4cs"]
+[gd_scene load_steps=28 format=3 uid="uid://bedho26bpm4cs"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_oefsj"]
 [ext_resource type="Script" path="res://Player/WeaponsManager.gd" id="2_8b4xd"]
@@ -433,6 +433,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-1.3439, -0.279253, 1.22173), Vector3(0, 0, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FPSRig/SwordHit/CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_le8cg"]
 length = 0.001
@@ -532,6 +544,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector3(-1.74533, -1.48353, 1.5708)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("FPSRig/SwordHit/CollisionShape3D:disabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mwwsp"]
 _data = {
@@ -549,6 +573,8 @@ _data = {
 "GunSword Shoot": SubResource("Animation_agg6g"),
 "RESET": SubResource("Animation_le8cg")
 }
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1rnlv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_sfpp7"]
 size = Vector3(0.1, 1, 0.1)
@@ -650,6 +676,13 @@ libraries = {
 [node name="BulletPoint" type="Node3D" parent="MeshInstance3D/WeaponsManager/FPSRig"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14158, -1)
 
+[node name="SwordHit" type="Area3D" parent="MeshInstance3D/WeaponsManager/FPSRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0708954, 0.25, -1.07408)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/WeaponsManager/FPSRig/SwordHit"]
+shape = SubResource("BoxShape3D_1rnlv")
+disabled = true
+
 [node name="GunSword" type="MeshInstance3D" parent="MeshInstance3D/WeaponsManager/FPSRig"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.25, -0.7)
 visible = false
@@ -671,3 +704,4 @@ skeleton = NodePath("../..")
 [connection signal="Update_Weapon_Stack" from="MeshInstance3D/WeaponsManager" to="CanvasLayer" method="_on_weapons_manager_update_weapon_stack"]
 [connection signal="Weapon_Changed" from="MeshInstance3D/WeaponsManager" to="CanvasLayer" method="_on_weapons_manager_weapon_changed"]
 [connection signal="animation_finished" from="MeshInstance3D/WeaponsManager/FPSRig/AnimationPlayer" to="MeshInstance3D/WeaponsManager" method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="MeshInstance3D/WeaponsManager/FPSRig/SwordHit" to="MeshInstance3D/WeaponsManager" method="_on_sword_hit_body_entered"]
