@@ -3,7 +3,8 @@ extends CharacterBody3D
 @onready var twist_pivot : Node3D = $TwistPivot
 @onready var pitch_pivot : Node3D = $TwistPivot/PitchPivot
 
-@onready var raycast : RayCast3D = $TwistPivot/PitchPivot/Camera3D/RayCast3D
+@onready var rayHook : RayCast3D = $TwistPivot/PitchPivot/Camera3D/RayCast3D
+@onready var rayGetDrops : RayCast3D = $MeshInstance3D/GetDrops
 @onready var camera : Camera3D = $TwistPivot/PitchPivot/Camera3D
 @onready var model : MeshInstance3D = $MeshInstance3D
 
@@ -21,9 +22,12 @@ func _physics_process(_delta):
 	
 	InputCameraMode()
 	
+	GetDrops()
 	move_and_slide()
+	
 
 
+#region New Code Region
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity_state : String = "Falling"
 var hook_position : Vector3
@@ -35,8 +39,10 @@ func GravityManagement():
 		global_position = global_position.move_toward(hook_position,.2)
 		if (global_position - hook_position).length() < .095:
 			gravity_state = "Falling"
+#endregion
 
 
+#region New Code Region
 var jump_velocity := 3.5
 func InputJump():
 	if Input.is_action_just_pressed("ui_accept"):
@@ -45,17 +51,21 @@ func InputJump():
 		if gravity_state == "Hooking":
 			gravity_state = "Falling"
 			velocity.y = jump_velocity * 2.5
+#endregion
 
 
+#region New Code Region
 func InputHook():
 	if Input.is_action_just_pressed("hook"):
-		if raycast.is_colliding():
+		if rayHook.is_colliding():
 			gravity_state = "Hooking"
-			hook_position = raycast.get_collision_point()
+			hook_position = rayHook.get_collision_point()
 		else:
 			gravity_state = "Falling"
+#endregion
 
 
+#region New Code Region
 var input_dir : Vector2
 var direction : Vector3
 var speed := 5.0
@@ -69,14 +79,18 @@ func InputMovement():
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
+#endregion
 
 
+#region New Code Region
 func InputHideMouse():
 	if Input.is_action_just_pressed("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+#endregion
+
 
 #region CameraFunctions
 var mouse_sensitivity := 0.001
@@ -118,6 +132,13 @@ func InputCameraMode():
 #endregion
 
 
+func GetDrops():
+	if rayGetDrops.is_colliding():
+		if rayGetDrops.get_collider().name.contains("DropMusket"):
+			$MeshInstance3D/WeaponsManager.AddAmmo("GunMusket")
+		if rayGetDrops.get_collider().name.contains("DropArquebus"):
+			$MeshInstance3D/WeaponsManager.AddAmmo("GunArquebus")
+		rayGetDrops.get_collider().queue_free()
 
 
 

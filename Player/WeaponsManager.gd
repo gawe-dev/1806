@@ -85,6 +85,8 @@ func shoot():
 		reload()
 
 func reload():
+	if Current_Weapon.Reserve_Ammo == 0:
+		return
 	if Current_Weapon.Current_Ammo == Current_Weapon.Magazine:
 		return
 	elif !Animation_Player.is_playing():
@@ -126,3 +128,7 @@ func Hit_Scan_Damage(Collider):
 func _on_sword_hit_body_entered(body):
 	if body.has_method("Hit_Successful"):
 		body.Hit_Successful(Current_Weapon.Damage)
+
+func AddAmmo(ammoType:String):
+	Weapon_List[ammoType].Reserve_Ammo += 1
+	emit_signal("Update_Ammo", [Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
