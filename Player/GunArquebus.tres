@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://cagb3d2oubgyu"]
+
+[ext_resource type="Script" path="res://Player/WeaponResource.gd" id="1_66day"]
+
+[resource]
+script = ExtResource("1_66day")
+Weapon_Name = "GunArquebus"
+Activate_Anim = "GunArquebus Activate"
+Shoot_Anim = "GunArquebus Shoot"
+Reload_Anim = "GunArquebus Reload"
+Deactivate_Anim = "GunArquebus Deactivate"
+Current_Ammo = 1
+Reserve_Ammo = 1
+Magazine = 1
+Max_Ammo = 1
+Auto_Fire = false
+Type = 1
+Weapon_Range = 30
+Damage = 1

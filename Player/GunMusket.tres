@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://3pnpicveb428"]
+
+[ext_resource type="Script" path="res://Player/WeaponResource.gd" id="1_qih50"]
+
+[resource]
+script = ExtResource("1_qih50")
+Weapon_Name = "GunMusket"
+Activate_Anim = "GunMusket Activate"
+Shoot_Anim = "GunMusket Shoot"
+Reload_Anim = "GunMusket Reload"
+Deactivate_Anim = "GunMusket Deactivate"
+Current_Ammo = 1
+Reserve_Ammo = 1
+Magazine = 1
+Max_Ammo = 1
+Auto_Fire = false
+Type = 1
+Weapon_Range = 15
+Damage = 1

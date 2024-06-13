@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0wk4cgfyxx26"]
+[gd_scene load_steps=9 format=3 uid="uid://c63f17bh2wcfp"]
 
-[ext_resource type="Script" path="res://Musketeer/Musketeer.gd" id="1_badvk"]
+[ext_resource type="Script" path="res://Arquebusier/Arquebusier.gd" id="1_2pob2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6rf0a"]
-radius = 0.35
+radius = 0.25
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7b0g"]
 albedo_color = Color(0.611765, 0.305882, 0.305882, 1)
@@ -14,8 +14,8 @@ size = Vector3(0.7, 0.5, 0.23)
 [sub_resource type="BoxMesh" id="BoxMesh_11i8w"]
 size = Vector3(0.3, 0.3, 0.3)
 
-[sub_resource type="BoxMesh" id="BoxMesh_23sm5"]
-size = Vector3(0.1, 0.1, 0.3)
+[sub_resource type="BoxMesh" id="BoxMesh_6qxbp"]
+size = Vector3(0.2, 0.2, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mnelf"]
 albedo_color = Color(0.360784, 0.180392, 0.180392, 1)
@@ -24,7 +24,7 @@ albedo_color = Color(0.360784, 0.180392, 0.180392, 1)
 size = Vector3(0.5, 1, 0.235)
 
 [node name="Musketeer" type="CharacterBody3D"]
-script = ExtResource("1_badvk")
+script = ExtResource("1_2pob2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -46,7 +46,7 @@ mesh = SubResource("BoxMesh_11i8w")
 
 [node name="Gun" type="MeshInstance3D" parent="CollisionShape3D/ShootRay"]
 transform = Transform3D(0.999927, 0, 0.0120774, 0, 1, 0, -0.0120774, 0, 0.999927, -0.2, 0, 0.660724)
-mesh = SubResource("BoxMesh_23sm5")
+mesh = SubResource("BoxMesh_6qxbp")
 
 [node name="ClimbRay" type="RayCast3D" parent="CollisionShape3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.948344, 0)

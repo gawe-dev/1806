@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c66xcag1omqr1"]
+[gd_scene load_steps=12 format=3 uid="uid://c66xcag1omqr1"]
 
 [ext_resource type="PackedScene" uid="uid://c6lmichtnv4av" path="res://Drops/PlacementDrop.tscn" id="1_0uteh"]
 [ext_resource type="PackedScene" uid="uid://qetkbumdir4p" path="res://Musketeer/MusketeerSpawn.tscn" id="1_spstg"]
+[ext_resource type="PackedScene" uid="uid://ba1lhskx3b2q0" path="res://Barricade/Barricade.tscn" id="2_tncal"]
+[ext_resource type="PackedScene" uid="uid://bedho26bpm4cs" path="res://Player/Player.tscn" id="3_mhftq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ojh31"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -16,7 +18,18 @@ sky = SubResource("Sky_71opo")
 tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h4j57"]
-albedo_color = Color(0.34902, 0.164706, 0.0627451, 1)
+albedo_color = Color(0.270588, 0.203922, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gtpbc"]
+transparency = 1
+albedo_color = Color(1, 1, 0.14902, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ff4f"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.564706)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0620e"]
+size = Vector3(0.2, 0.2, 0.2)
 
 [node name="Node3D" type="Node3D"]
 
@@ -29,27 +42,80 @@ environment = SubResource("Environment_y0uth")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.483032, 0)
+[node name="CSGBox3D" type="CSGBox3D" parent="Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.546386, -13.4599)
 material_override = SubResource("StandardMaterial3D_h4j57")
 use_collision = true
-size = Vector3(17, 1, 17)
+size = Vector3(67.9072, 1.12671, 40.338)
 
 [node name="Player" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9906, 0, 38.3566)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.780125, 0, -0.625624, 0, 1, 0, 0.625624, 0, -0.780125, 0, 1.88144, -9.29598)
+[node name="Player1" parent="." instance=ExtResource("3_mhftq")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.43214, 4.0223, 1.22098)
 
 [node name="Mid" type="Node" parent="."]
 
-[node name="Node3D" type="Node3D" parent="Mid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 3)
+[node name="Barricade" parent="Mid" instance=ExtResource("2_tncal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.67, 1.53123, -12.3048)
 
 [node name="Drops" parent="." instance=ExtResource("1_0uteh")]
 unique_name_in_owner = true
 
 [node name="MusketeerSpawn" parent="." instance=ExtResource("1_spstg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.00396, -8.04986)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.7401, 1.10981, -32.7649)
 laneAttack = "Mid"
+
+[node name="Cover1" parent="MusketeerSpawn/Flag2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_gtpbc")
+
+[node name="Cover2" parent="MusketeerSpawn/Flag2" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_gtpbc")
+
+[node name="Flag3" type="Node3D" parent="MusketeerSpawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13)
+
+[node name="Point" type="MeshInstance3D" parent="MusketeerSpawn/Flag3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_7ff4f")
+mesh = SubResource("BoxMesh_0620e")
+skeleton = NodePath("../..")
+
+[node name="Cover1" type="MeshInstance3D" parent="MusketeerSpawn/Flag3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.1, -2)
+material_override = SubResource("StandardMaterial3D_gtpbc")
+mesh = SubResource("BoxMesh_0620e")
+skeleton = NodePath("../..")
+
+[node name="Cover2" type="MeshInstance3D" parent="MusketeerSpawn/Flag3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.1, -2)
+material_override = SubResource("StandardMaterial3D_gtpbc")
+mesh = SubResource("BoxMesh_0620e")
+skeleton = NodePath("../..")
+
+[node name="Cover3" type="MeshInstance3D" parent="MusketeerSpawn/Flag3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.1, 1)
+material_override = SubResource("StandardMaterial3D_gtpbc")
+mesh = SubResource("BoxMesh_0620e")
+skeleton = NodePath("../..")
+
+[node name="Cover4" type="MeshInstance3D" parent="MusketeerSpawn/Flag3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.1, 1)
+material_override = SubResource("StandardMaterial3D_gtpbc")
+mesh = SubResource("BoxMesh_0620e")
+skeleton = NodePath("../..")
+
+[node name="Flag4" type="Node3D" parent="MusketeerSpawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
+
+[node name="Point" type="MeshInstance3D" parent="MusketeerSpawn/Flag4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_7ff4f")
+mesh = SubResource("BoxMesh_0620e")
+skeleton = NodePath("../..")
+
+[editable path="MusketeerSpawn"]

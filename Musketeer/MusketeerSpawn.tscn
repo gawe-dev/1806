@@ -40,6 +40,12 @@ skeleton = NodePath("../..")
 [node name="Flag2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
+[node name="Point" type="MeshInstance3D" parent="Flag2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_7ff4f")
+mesh = SubResource("BoxMesh_0620e")
+skeleton = NodePath("../..")
+
 [node name="Cover1" type="MeshInstance3D" parent="Flag2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.1, 0)
 material_override = SubResource("StandardMaterial3D_7ff4f")

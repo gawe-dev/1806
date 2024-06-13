@@ -32,7 +32,7 @@ func _physics_process(_delta):
 	ApplyGravity()
 	ForwardMode()
 	RotateToward()
-	FrontDetection()
+	ClimbStairs()
 	PrepareAiming()
 	move_and_slide()
 
@@ -84,13 +84,9 @@ func NextFlagOrDie():
 		else:
 			queue_free()
 
-func FrontDetection():
-	if climb_ray.is_colliding():
-		if climb_ray.get_collider().is_in_group("Stair"):
-			velocity.y = 2
-		if climb_ray.get_collider().is_in_group("Barricade"):
-			climb_ray.get_collider().GetDamage(1)
-			queue_free()
+func ClimbStairs():
+	if climb_ray.is_colliding() and climb_ray.get_collider().is_in_group("Stair"):
+		velocity.y = 2
 
 var current_barricade := 0
 var reloading := false
@@ -130,7 +126,7 @@ func ShootOrReload():
 		shoot_ray.enabled = false
 		can_shoot = false
 		reloading = true
-		timer.wait_time = 5
+		timer.wait_time = 10
 		timer.start()
 	else:
 		shoot_ray.enabled = true
@@ -139,8 +135,7 @@ func ShootOrReload():
 		reloading = false
 
 var health := 1
-func Hit_Successful(damage:int):
-	health -= damage
+func GetDamage(damage:int):
 	if health <= 0:
 		#dropear
 		drops.createDrop(global_position)

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://b6wuwl6d53t6l"]
+
+[ext_resource type="Script" path="res://Player/WeaponResource.gd" id="1_xf0r5"]
+
+[resource]
+script = ExtResource("1_xf0r5")
+Weapon_Name = "GunSword"
+Activate_Anim = "GunSword Activate"
+Shoot_Anim = "GunSword Shoot"
+Reload_Anim = "GunSword Reload"
+Deactivate_Anim = "GunSword Deactivate"
+Current_Ammo = 9999
+Reserve_Ammo = 9999
+Magazine = 9999
+Max_Ammo = 9999
+Auto_Fire = true
+Type = 4
+Weapon_Range = 0
+Damage = 0
