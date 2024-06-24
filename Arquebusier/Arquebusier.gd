@@ -32,19 +32,23 @@ func _physics_process(_delta):
 	ApplyGravity()
 	ForwardMode()
 	RotateToward()
-	FrontDetection()
+	BarricadeDetection()
 	PrepareAiming()
 	move_and_slide()
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravityV3:Vector3
 func ApplyGravity():
-	velocity.y -= gravity * delta
+	if climb_ray.is_colliding():
+		gravityV3 = transform.basis.y * 2
+	else:
+		gravityV3 = transform.basis.y * -gravity
+
 
 var speed : float
 var forward_mode := "walk"
 func ForwardMode():
-	velocity.x = global_basis.z.x * speed
-	velocity.z = global_basis.z.z * speed
+	velocity = transform.basis.z * speed + gravityV3
 	if forward_mode.contains("walk"):
 		speed = 1
 	if forward_mode.contains("stop"):
@@ -84,10 +88,8 @@ func NextFlagOrDie():
 		else:
 			queue_free()
 
-func FrontDetection():
+func BarricadeDetection():
 	if climb_ray.is_colliding():
-		if climb_ray.get_collider().is_in_group("Stair"):
-			velocity.y = 2
 		if climb_ray.get_collider().is_in_group("Barricade"):
 			climb_ray.get_collider().GetDamage(1)
 			queue_free()

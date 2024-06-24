@@ -1,18 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://h3mqx5efmr3o"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_swrd8"]
-size = Vector3(0.3, 0.3, 1)
+[ext_resource type="PackedScene" uid="uid://c6yriqc1f7vf5" path="res://@Commons/GLB/arquebus.glb" id="1_4h3e0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cnt0q"]
 size = Vector3(0.5, 0.75, 1.5)
 
 [node name="DropMusket" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 collision_layer = 2
 collision_mask = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.499487, 0)
-mesh = SubResource("BoxMesh_swrd8")
+[node name="arquebus" parent="." instance=ExtResource("1_4h3e0")]
+transform = Transform3D(2.21257e-15, -1.158, -5.06178e-08, -5.06178e-08, -5.06178e-08, 1.158, -1.158, 0, -5.06178e-08, 0, 0.250497, -0.215)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)

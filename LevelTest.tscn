@@ -1,10 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://c66xcag1omqr1"]
+[gd_scene load_steps=18 format=3 uid="uid://c66xcag1omqr1"]
 
 [ext_resource type="PackedScene" uid="uid://c6lmichtnv4av" path="res://Drops/PlacementDrop.tscn" id="1_0uteh"]
 [ext_resource type="PackedScene" uid="uid://qetkbumdir4p" path="res://Musketeer/MusketeerSpawn.tscn" id="1_spstg"]
 [ext_resource type="PackedScene" uid="uid://ba1lhskx3b2q0" path="res://Barricade/Barricade.tscn" id="2_tncal"]
 [ext_resource type="PackedScene" uid="uid://bedho26bpm4cs" path="res://Player/Player.tscn" id="3_mhftq"]
 [ext_resource type="PackedScene" uid="uid://ccwnly7avoeb8" path="res://Arquebusier/ArquebusierSpawn.tscn" id="5_2nhl8"]
+[ext_resource type="PackedScene" uid="uid://dhtcg5muo464p" path="res://Casa_01/Casa1.tscn" id="6_rdtsw"]
+[ext_resource type="PackedScene" uid="uid://dt0h1er88oyd3" path="res://Recoba/Recova_2.glb" id="7_4pqbm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ojh31"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -39,6 +41,9 @@ albedo_color = Color(1, 0, 0, 0.564706)
 [sub_resource type="BoxMesh" id="BoxMesh_h6vx2"]
 size = Vector3(0.2, 0.2, 0.2)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_yjvvu"]
+size = Vector3(43.9827, 10.2377, 6.0625)
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Env" type="Node" parent="."]
@@ -51,29 +56,29 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Env"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.546386, -13.4599)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.27166, 0.546386, -3.15705)
 material_override = SubResource("StandardMaterial3D_h4j57")
 use_collision = true
-size = Vector3(67.9072, 1.12671, 40.338)
+size = Vector3(49.3639, 1.12671, 60.9437)
 
-[node name="Player" type="Node3D" parent="."]
+[node name="Player2" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.3703, 1.90735e-06, -29.0127)
 
-[node name="Player1" parent="." instance=ExtResource("3_mhftq")]
+[node name="Player" parent="." instance=ExtResource("3_mhftq")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.43214, 4.0223, 1.22098)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 3, 25)
 
 [node name="Mid" type="Node" parent="."]
 
 [node name="Barricade" parent="Mid" instance=ExtResource("2_tncal")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.67, 1.53123, -12.3048)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.75109, 1.53123, -15.9095)
 
 [node name="Drops" parent="." instance=ExtResource("1_0uteh")]
 unique_name_in_owner = true
 
 [node name="ArquebusierSpawn" parent="." instance=ExtResource("5_2nhl8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5793, 1.13172, -33.088)
+transform = Transform3D(0.986026, 0, 0, 0, 0.986026, 0, 0, 0, 0.986026, 6.81685, 1.13172, -33.088)
 laneAttack = "Mid"
 
 [node name="Flag3" type="Node3D" parent="ArquebusierSpawn"]
@@ -197,6 +202,28 @@ mesh = SubResource("BoxMesh_h6vx2")
 skeleton = NodePath("../..")
 
 [node name="Models" type="Node" parent="."]
+
+[node name="Node3D" parent="Models" instance=ExtResource("6_rdtsw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5694, 1.10974, -20.0641)
+
+[node name="Node3D2" parent="Models" instance=ExtResource("6_rdtsw")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 12.0003, 1.10974, -15.5137)
+
+[node name="Node3D3" parent="Models" instance=ExtResource("6_rdtsw")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -27.7765, 1.10974, -14.2247)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.2226, 5.33686, 13.4481)
+shape = SubResource("BoxShape3D_yjvvu")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2774, 5.33686, 13.4481)
+shape = SubResource("BoxShape3D_yjvvu")
+
+[node name="Recova_2" parent="StaticBody3D" instance=ExtResource("7_4pqbm")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.5642, 1.10974, 13.4545)
 
 [editable path="ArquebusierSpawn"]
 [editable path="MusketeerSpawn"]

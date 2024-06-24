@@ -7,6 +7,9 @@
 [ext_resource type="Script" path="res://Player/PlayerHud.gd" id="3_m7tu7"]
 [ext_resource type="Resource" uid="uid://3pnpicveb428" path="res://Player/GunMusket.tres" id="4_bmk4h"]
 [ext_resource type="Resource" uid="uid://cagb3d2oubgyu" path="res://Player/GunArquebus.tres" id="5_4btnx"]
+[ext_resource type="PackedScene" uid="uid://b0sux77eusqdw" path="res://@Commons/GLB/musket.glb" id="8_eiodm"]
+[ext_resource type="PackedScene" uid="uid://cresnk6t16ltr" path="res://@Commons/GLB/sword.glb" id="8_v33co"]
+[ext_resource type="PackedScene" uid="uid://c6yriqc1f7vf5" path="res://@Commons/GLB/arquebus.glb" id="10_oaeoy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ji4bv"]
 
@@ -576,16 +579,8 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1rnlv"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_sfpp7"]
-size = Vector3(0.1, 1, 0.1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_l72ss"]
-size = Vector3(0.1, 0.1, 0.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_uu20d"]
-size = Vector3(0.2, 0.2, 1)
-
 [node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_oefsj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -640,10 +635,10 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_ji4bv")
 
 [node name="TwistPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="PitchPivot" type="Node3D" parent="TwistPivot"]
 
@@ -657,7 +652,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -5)
 target_position = Vector3(0, 2, -10)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_k7owp")
 
 [node name="GetDrops" type="RayCast3D" parent="MeshInstance3D"]
@@ -688,22 +682,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0708954, 0.25, -1.07408)
 shape = SubResource("BoxShape3D_1rnlv")
 disabled = true
 
-[node name="GunSword" type="MeshInstance3D" parent="MeshInstance3D/WeaponsManager/FPSRig"]
+[node name="GunSword" type="Node3D" parent="MeshInstance3D/WeaponsManager/FPSRig"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.25, -0.7)
 visible = false
-mesh = SubResource("BoxMesh_sfpp7")
-skeleton = NodePath("../..")
 
-[node name="GunMusket" type="MeshInstance3D" parent="MeshInstance3D/WeaponsManager/FPSRig"]
+[node name="sword" parent="MeshInstance3D/WeaponsManager/FPSRig/GunSword" instance=ExtResource("8_v33co")]
+transform = Transform3D(3.04754e-15, 6.97197e-08, 1.595, 1.595, -6.97197e-08, 0, 6.97197e-08, 1.595, -6.97197e-08, 0.00158942, -0.313295, 0.000974059)
+
+[node name="GunMusket" type="Node3D" parent="MeshInstance3D/WeaponsManager/FPSRig"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.1, -0.9)
 visible = false
-mesh = SubResource("BoxMesh_l72ss")
-skeleton = NodePath("../..")
 
-[node name="GunArquebus" type="MeshInstance3D" parent="MeshInstance3D/WeaponsManager/FPSRig"]
+[node name="musket" parent="MeshInstance3D/WeaponsManager/FPSRig/GunMusket" instance=ExtResource("8_eiodm")]
+transform = Transform3D(2.09, 0, 0, 0, 2.09, 0, 0, 0, 2.09, 0, 0, 0)
+
+[node name="GunArquebus" type="Node3D" parent="MeshInstance3D/WeaponsManager/FPSRig"]
 transform = Transform3D(0.98106, -0.0871592, 0.172988, -0.173649, 6.28608e-07, 0.984808, -0.0858351, -0.996195, -0.0151345, 0, 0.2, 0.75)
-mesh = SubResource("BoxMesh_uu20d")
-skeleton = NodePath("../..")
+
+[node name="arquebus" parent="MeshInstance3D/WeaponsManager/FPSRig/GunArquebus" instance=ExtResource("10_oaeoy")]
+transform = Transform3D(-6.27258e-08, -1.06916e-08, 1.435, 4.94486e-08, 1.435, 1.06916e-08, -1.435, 4.94486e-08, -6.27258e-08, 0, 0, 0)
 
 [connection signal="Update_Ammo" from="MeshInstance3D/WeaponsManager" to="CanvasLayer" method="_on_weapons_manager_update_ammo"]
 [connection signal="Update_Weapon_Stack" from="MeshInstance3D/WeaponsManager" to="CanvasLayer" method="_on_weapons_manager_update_weapon_stack"]

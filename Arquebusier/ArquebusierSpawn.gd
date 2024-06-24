@@ -5,9 +5,9 @@ extends Node
 
 @export var laneAttack:String
 
-func _process(delta):
-	if Input.is_action_just_pressed("ui_accept"):
-		StartWave()
+func _ready():
+	timer.timeout.connect(StartWave)
+	StartWave()
 
 var arquebusierInstance: CharacterBody3D
 func StartWave():

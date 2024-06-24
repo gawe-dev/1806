@@ -52,6 +52,7 @@ func ForwardMode():
 
 var current_flag = 0
 func RotateToward():
+	#si actual barricada no tiene propiedad destruida en true
 	#si mi padre es cover
 	if get_parent().name.contains("Cover"):
 		#si estoy lejos de cover
@@ -61,7 +62,8 @@ func RotateToward():
 			rotation.z = 0
 		else:
 			forward_mode = "stop"
-	else: #si mi padre no es cover
+#   si mi padre no es cover
+	else:
 		#si la bandera tiene hijos
 		if flags[current_flag].find_children("Cover*").size() != 0:
 			#recorrer cada hijo (cover)

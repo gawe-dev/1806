@@ -141,5 +141,13 @@ func GetDrops():
 		rayGetDrops.get_collider().queue_free()
 
 
-
+var health := 5
+func GetDamage(damage:int):
+	health -= damage
+	if health <= 0:
+		#dropear
+		position.x=-9
+		position.y=3
+		position.z=25
+		health = 5
 

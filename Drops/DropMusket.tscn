@@ -1,18 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://p7rt5ind7spm"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_apmsu"]
-size = Vector3(0.2, 0.2, 0.5)
+[ext_resource type="PackedScene" uid="uid://b0sux77eusqdw" path="res://@Commons/GLB/musket.glb" id="1_gve0p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cnt0q"]
 size = Vector3(0.5, 0.75, 1.5)
 
 [node name="DropMusket" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.245406, 0)
 collision_layer = 2
 collision_mask = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.499487, 0)
-mesh = SubResource("BoxMesh_apmsu")
+[node name="musket" parent="." instance=ExtResource("1_gve0p")]
+transform = Transform3D(0.269943, -3.73664, -1.1706, 3.9148, 0.282814, 6.29288e-09, 0.0843468, -1.16755, 3.74638, 0, 0.348127, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
